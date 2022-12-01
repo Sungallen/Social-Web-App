@@ -1,8 +1,7 @@
-import mysql from "mysql";
+import mysql, { MysqlError, OkPacket } from "mysql";
 import config from "../../config/config";
 import _error from "../helpers/error";
 
-console.log(config);
 const connectionPool = mysql.createPool({
   connectionLimit: 10,
   host: config.mysqlHost,
@@ -12,8 +11,8 @@ const connectionPool = mysql.createPool({
   port: config.mysqlPort,
 });
 
-const query = (queryString: any, queryParameter: any) =>
-  new Promise((resolve, reject) => {
+const query = (queryString: string, queryParameter: Array<any> | any) =>
+  new Promise<OkPacket>((resolve, reject) => {
     connectionPool.getConnection((connectionError, connection) => {
       if (connectionError) {
         reject(_error.APIError(connectionError));
@@ -21,7 +20,7 @@ const query = (queryString: any, queryParameter: any) =>
         connection.query(
           queryString,
           Array.isArray(queryParameter) ? queryParameter : [queryParameter],
-          (error: any, result) => {
+          (error, result) => {
             if (error) {
               reject(_error.MySQLError(error));
             } else {
