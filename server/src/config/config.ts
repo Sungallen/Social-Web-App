@@ -14,6 +14,10 @@ const envVarSchema = Joi.object()
     MYSQL_NAME: Joi.string(), // 字串
     VERSION: Joi.string(), // 字串
     MYSQL_DATABASE: Joi.string(),
+    NEO4J_URL: Joi.string(),
+    NEO4J_USER: Joi.string(),
+    NEO4J_PASS: Joi.string(),
+    NEO4J_DATABASE: Joi.string(),
   })
   .unknown()
   .required();
@@ -27,6 +31,10 @@ const envVars = envVarSchema.validate({
   MYSQL_PASS: process.env.MYSQL_PASS,
   MYSQL_NAME: process.env.MYSQL_NAME,
   MYSQL_DATABASE: process.env.MYSQL_DATABASE,
+  NEO4J_URL: process.env.NEO4J_URL,
+  NEO4J_USER: process.env.NEO4J_USER,
+  NEO4J_PASS: process.env.NEO4J_PASS,
+  NEO4J_DATABASE: process.env.NEO4J_DATABASE,
 });
 // process.env 撈取 .env 內的變數做 joi 驗證
 
@@ -42,6 +50,10 @@ const config = {
   mysqlUserName: envVars.value.MYSQL_USER, // 用戶名稱 (MYSQL_USER)
   mysqlPass: envVars.value.MYSQL_PASS, // 資料庫密碼(MYSQL_PASS)
   mysqlDatabase: envVars.value.MYSQL_DATABASE, // 資料庫名稱(MYSQL_DATABASE)
+  neo4jUrl: envVars.value.NEO4J_URL,
+  neo4jUser: envVars.value.NEO4J_USER,
+  neo4jPass: envVars.value.NEO4J_PASS,
+  neo4jDatabase: envVars.value.NEO4J_DATABASE,
 };
 
 export default config; // 匯出共用

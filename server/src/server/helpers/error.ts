@@ -1,6 +1,7 @@
 import config from "../../config/config";
 import httpStatus from "http-status";
 import { MysqlError } from "mysql";
+
 function APIError(message: any) {
   return {
     message,
@@ -9,7 +10,7 @@ function APIError(message: any) {
     code: 400,
   };
 }
-function MySQLError(error: any) {
+function MySQLError(error: MysqlError) {
   return {
     message: error.sqlMessage,
     sql: error.sql,
