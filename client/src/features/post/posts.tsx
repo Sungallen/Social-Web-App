@@ -16,7 +16,7 @@ const Posts = () => {
       userId: 123,
     },
     {
-      id: 1,
+      id: 2,
       content: 'stinres',
       image:
         'http://localhost:4000/api/user/image?path=/server/media/profile_pictures/main_page.png',
