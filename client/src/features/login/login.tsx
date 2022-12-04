@@ -16,6 +16,10 @@ export const Login = () => {
     dispatch(userActions.loginSaga(account.current?.value, password.current?.value))
   }
 
+  const registerClick = () => {
+    navigate('/register')
+  }
+
   useEffect(() => {
     if (loginStatus === 'Login') {
       navigate('/main')
@@ -30,7 +34,7 @@ export const Login = () => {
           <h1>Welcome SportsClub</h1>
           <p>This is a social web app developed by Allen, Henry and Mr.Xie</p>
           <span>Do you have an account?</span>
-          <button>Register</button>
+          <button onClick={registerClick}>Register</button>
         </div>
         <div className="right">
           <h1>Login</h1>
