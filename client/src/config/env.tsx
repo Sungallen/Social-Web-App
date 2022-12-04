@@ -19,5 +19,4 @@ export const Env = {
     return this.MSW_ENABLED === 'true'
   },
 }
-
 export default Env
