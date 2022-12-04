@@ -1,12 +1,28 @@
 import './login.scss'
-import { SyntheticEvent, useRef } from 'react'
+import { SyntheticEvent, useEffect, useRef } from 'react'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
+import { userActions, userSlice } from 'features/store/user.slice'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
   const account = useRef<HTMLInputElement | null>(null)
   const password = useRef<HTMLInputElement | null>(null)
+  const { loginStatus } = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   function onSubmit(e: SyntheticEvent) {
     e.preventDefault()
+    dispatch(userActions.loginSaga(account.current?.value, password.current?.value))
   }
+
+  useEffect(() => {
+    if (loginStatus === 'Login') {
+      navigate('/main')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loginStatus])
+
   return (
     <div className="login">
       <div className="card">

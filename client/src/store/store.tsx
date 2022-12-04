@@ -5,7 +5,7 @@ import Env from 'config/env'
 import { createReduxHistoryContext } from 'redux-first-history'
 import logger from 'redux-logger'
 import { rootSaga } from 'store/root.saga'
-import loginReducer from 'features/store/login.slice'
+import userReducer from 'features/store/user.slice'
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
@@ -18,11 +18,12 @@ const makeStore = () => {
 
   const store = configureStore({
     reducer: {
-      login: loginReducer,
+      user: userReducer,
+      router: routerReducer,
     },
     devTools: Env.isDev(),
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware({ thunk: false })
+      getDefaultMiddleware({ thunk: false, serializableCheck: false })
         .concat(sagaMiddleware)
         .concat(routerMiddleware)
         .concat(logger),

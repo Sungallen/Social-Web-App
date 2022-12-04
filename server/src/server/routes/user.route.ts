@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import {
+  login,
   registerController,
   uploadImage,
 } from "../controllers/user.controller";
@@ -12,4 +13,5 @@ userRouter.get("/", (req: Request, res: Response) => {
 
 userRouter.post("/register", registerController);
 userRouter.get("/image", uploadImage);
+userRouter.get("/login", login);
 export default userRouter;
