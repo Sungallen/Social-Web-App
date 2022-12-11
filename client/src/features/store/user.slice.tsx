@@ -12,7 +12,7 @@ const initialState: IUserSlice = {
 }
 
 export const userSlice = createSlice({
-  name: 'login',
+  name: 'user',
   initialState,
   reducers: {
     setUserInfo(state, action: PayloadAction<IUser>) {
@@ -29,10 +29,25 @@ export const userSlice = createSlice({
 
 export const userActions = {
   loginSaga: createAction(
-    'user/loginSaga',
+    `${userSlice.name}/loginSaga`,
     (account: string | undefined, password: string | undefined) => ({
       payload: { account, password },
     }),
+  ),
+  submitPostSaga: createAction(
+    `${userSlice}/postSaga`,
+    (content: string | undefined, image: File | null) => ({ payload: { content, image } }),
+  ),
+  registerSaga: createAction(
+    `${userSlice.name}/registerSaga`,
+    (
+      email: string | undefined,
+      username: string | undefined,
+      account: string | undefined,
+      password: string | undefined,
+      created_time: Date,
+      gender: number,
+    ) => ({ payload: { email, username, account, password, created_time, gender } }),
   ),
 }
 

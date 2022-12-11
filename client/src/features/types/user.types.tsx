@@ -21,3 +21,12 @@ export interface IUser {
   email: string
   gender: number
 }
+
+export interface IRegisterPayload {
+  email: string
+  username: string
+  account: string
+  password: string
+  created_time: Date
+  gender: number
+}

@@ -29,7 +29,7 @@ module.exports = {
           paths: ['src'],
           extensions: ['.tsx', '.ts', '.js', '.json'],
         },
-        alias: [['src', './src']],
+        alias: [['src', './src'], '*.png'],
       },
     },
     rules: {

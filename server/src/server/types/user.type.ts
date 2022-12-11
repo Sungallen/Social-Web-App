@@ -10,7 +10,6 @@ export interface IRegisterbody {
   created_time: string;
   account: string;
   password: string;
-  birth: string;
   email: string;
 }
 

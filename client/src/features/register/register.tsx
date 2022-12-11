@@ -1,22 +1,43 @@
 import './register.scss'
-import { useRef, useState } from 'react'
+import { SyntheticEvent, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { SelectChangeEvent } from '@mui/material/Select'
+import { useAppDispatch } from 'store/hooks'
+import { userActions } from 'features/store/user.slice'
 
 export const Register = () => {
   const email = useRef<HTMLInputElement | null>(null)
   const account = useRef<HTMLInputElement | null>(null)
+  const username = useRef<HTMLInputElement | null>(null)
   const password = useRef<HTMLInputElement | null>(null)
-  const [age, setAge] = useState('')
+  const [age, setAge] = useState<string>('')
   const navigate = useNavigate()
-  function onSubmit() {}
+  const dispatch = useAppDispatch()
+
   const loginClick = () => {
     navigate('/login')
   }
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value)
   }
+
+  const onRegister = (e: SyntheticEvent) => {
+    e.preventDefault()
+    console.log(account.current?.value)
+    dispatch(
+      userActions.registerSaga(
+        email.current?.value,
+        account.current?.value,
+        username.current?.value,
+        password.current?.value,
+        new Date(),
+        Number(age),
+      ),
+    )
+    navigate('/login')
+  }
+
   return (
     <div className="register">
       <div className="card">
@@ -28,9 +49,10 @@ export const Register = () => {
         </div>
         <div className="right">
           <h1>Register</h1>
-          <form onSubmit={onSubmit}>
-            <input type="text" placeholder="email" ref={email} />
-            <input type="text" placeholder="Username" ref={account} />
+          <form onSubmit={onRegister}>
+            <input type="text" placeholder="Email" ref={email} />
+            <input type="text" placeholder="Username" ref={username} />
+            <input type="text" placeholder="Account" ref={account} />
             <input type="text" placeholder="Password" ref={password} />
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
@@ -44,25 +66,9 @@ export const Register = () => {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
-              <Select
-                labelId="demo-simple-select-filled-label"
-                id="demo-simple-select-filled"
-                value={age}
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={1}>Male</MenuItem>
+                <MenuItem value={2}>Female</MenuItem>
+                <MenuItem value={3}>Non-binary</MenuItem>
               </Select>
             </FormControl>
             <button>Register</button>
