@@ -21,6 +21,7 @@ export const registerController = (
         res.status(400).send(error);
       });
   } catch (e) {
+    console.log(e);
     res.status(400).send(e);
   }
 };
@@ -28,7 +29,7 @@ export const registerController = (
 export const uploadImage = (req: Request<{ path: string }>, res: Response) => {
   const path = req.query.path;
   const rootPath = dirname(require.main.filename);
-  res.sendFile(rootPath + path);
+  res.status(200).sendFile(rootPath + path);
 };
 
 export const login = (

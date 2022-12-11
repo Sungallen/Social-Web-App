@@ -6,14 +6,13 @@ import { IRegisterbody, IRegisterRes } from "../types/user.type";
 const register = (insertValues: IRegisterbody): Promise<IRegisterRes> =>
   new Promise((resolve, reject) => {
     query(
-      "INSERT INTO users (`username`, `gender`, `created_time`, `account`, `password`, `birth`, `email`) VALUE (?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO users (`username`, `gender`, `created_time`, `account`, `password`,  `email`) VALUE (?, ?, ?, ?, ?, ?)",
       [
         insertValues.username,
         insertValues.gender,
         insertValues.created_time,
         insertValues.account,
         insertValues.password,
-        insertValues.birth,
         insertValues.email,
       ]
     )

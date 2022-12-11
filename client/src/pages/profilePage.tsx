@@ -1,5 +1,6 @@
 import Post from 'features/post/post'
 import Posts from 'features/post/posts'
+import Share from 'features/postSend/postSend'
 import { LeftBar } from 'features/profile/leftbar/leftbar'
 import { Navbar } from 'features/profile/navbar/navbar'
 import RightBar from 'features/profile/rightbar/rightbar'
@@ -40,7 +41,10 @@ export const ProfilePage: React.FC = () => {
         <div style={{ flex: 0.5 }}>
           <Outlet />
         </div>
-        <Posts />
+        <div style={{ display: 'table-column' }}>
+          <Share />
+          <Posts />
+        </div>
         <div style={{ flex: 0.5 }}>
           <Outlet />
         </div>
