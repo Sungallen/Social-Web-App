@@ -6,7 +6,6 @@ const initialState: IUserSlice = {
   email: '',
   account: '',
   created_time: new Date(),
-  birth: new Date(),
   gender: 0,
   loginStatus: '',
 }
@@ -20,7 +19,6 @@ export const userSlice = createSlice({
       state.email = action.payload.email
       state.account = action.payload.account
       state.created_time = new Date(action.payload.created_time)
-      state.birth = new Date(action.payload.birth)
       state.gender = action.payload.gender
       state.loginStatus = 'Login'
     },

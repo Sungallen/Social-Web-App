@@ -1,7 +1,8 @@
 import { neo4jUserRegister } from "../database_operations/neo4j.operations";
 import query from "../database_operations/operations";
+import { generateAccessToken } from "../helpers/authetication";
 import { BKTree } from "../helpers/BKtree";
-import { IRegisterbody, IRegisterRes } from "../types/user.type";
+import { IRegisterbody, IRegisterRes, IUser } from "../types/user.type";
 
 const register = (insertValues: IRegisterbody): Promise<IRegisterRes> =>
   new Promise((resolve, reject) => {
@@ -65,7 +66,7 @@ export const loginModule = (account: string, password: string): Promise<any> =>
     console.log(account, password);
     query("SELECT * FROM users WHERE account = ?", [account])
       .then((result) => {
-        let queryObject: any = Object.values(
+        let queryObject: IUser[] = Object.values(
           JSON.parse(JSON.stringify(result))
         );
         if (queryObject.length === 0) {
@@ -73,12 +74,20 @@ export const loginModule = (account: string, password: string): Promise<any> =>
         } else if (password !== queryObject[0].password) {
           resolve("The password is not correct");
         } else {
-          resolve(queryObject);
+          const accessToken = generateAccessToken(queryObject[0])
+          resolve({
+            user: queryObject,
+            token: accessToken});
         }
       })
       .catch((error) => {
-        console.log(error);
+        reject(error);
       });
   });
+
+// export const getFriendSug = (account: string): Promise<any> =>
+//   new Promise((resolve, reject) => {
+//     query();
+//   });
 
 export default register;
