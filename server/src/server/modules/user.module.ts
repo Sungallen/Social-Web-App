@@ -74,10 +74,11 @@ export const loginModule = (account: string, password: string): Promise<any> =>
         } else if (password !== queryObject[0].password) {
           resolve("The password is not correct");
         } else {
-          const accessToken = generateAccessToken(queryObject[0])
+          const accessToken = generateAccessToken(queryObject[0]);
           resolve({
             user: queryObject,
-            token: accessToken});
+            token: accessToken,
+          });
         }
       })
       .catch((error) => {
