@@ -18,6 +18,8 @@ const envVarSchema = Joi.object()
     NEO4J_USER: Joi.string(),
     NEO4J_PASS: Joi.string(),
     NEO4J_DATABASE: Joi.string(),
+    ACCESS_TOKEN_SECRET: Joi.string(),
+    REFRESH_TOKEN_ACCESS: Joi.string()
   })
   .unknown()
   .required();
@@ -35,6 +37,8 @@ const envVars = envVarSchema.validate({
   NEO4J_USER: process.env.NEO4J_USER,
   NEO4J_PASS: process.env.NEO4J_PASS,
   NEO4J_DATABASE: process.env.NEO4J_DATABASE,
+  ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET
 });
 // process.env 撈取 .env 內的變數做 joi 驗證
 
@@ -54,6 +58,8 @@ const config = {
   neo4jUser: envVars.value.NEO4J_USER,
   neo4jPass: envVars.value.NEO4J_PASS,
   neo4jDatabase: envVars.value.NEO4J_DATABASE,
+  accessToken: envVars.value.ACCESS_TOKEN_SECRET,
+  refreshToken: envVars.value.REFRESH_TOKEN_ACCESS
 };
 
 export default config; // 匯出共用

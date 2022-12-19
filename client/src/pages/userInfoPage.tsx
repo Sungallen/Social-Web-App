@@ -1,14 +1,12 @@
-import Post from 'features/post/post'
-import Posts from 'features/post/posts'
-import Share from 'features/postSend/postSend'
 import { LeftBar } from 'features/profile/leftbar/leftbar'
 import { Navbar } from 'features/profile/navbar/navbar'
 import RightBar from 'features/profile/rightbar/rightbar'
+import { UserInfo } from 'features/userInfo/userInfo'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { IPost } from './types'
 
-export const ProfilePage: React.FC = () => {
+export const UserInfoPage: React.FC = () => {
   const post: IPost[] = [
     {
       id: 1,
@@ -38,20 +36,15 @@ export const ProfilePage: React.FC = () => {
       <Navbar />
       <div style={{ display: 'flex' }}>
         <LeftBar />
-        <div style={{ flex: 0.5 }}>
+        <div style={{ flex: 0.2 }}>
           <Outlet />
         </div>
         <div style={{ display: 'table-column' }}>
-          <Share />
-          <Posts />
-        </div>
-        <div style={{ flex: 0.5 }}>
-          <Outlet />
+          <UserInfo />
         </div>
         <RightBar />
       </div>
     </div>
   )
 }
-
-export default ProfilePage
+export default UserInfoPage

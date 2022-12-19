@@ -8,6 +8,7 @@ import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded'
 import { IconButton } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useAppSelector } from 'store/hooks'
 
 const theme = createTheme({
   palette: {
@@ -18,6 +19,7 @@ const theme = createTheme({
 })
 export const Navbar = () => {
   const navigate = useNavigate()
+  const currentUser = useAppSelector(state => state.user)
   const mapOnClick = () => {
     navigate('/map')
   }
@@ -59,7 +61,7 @@ export const Navbar = () => {
           </IconButton>
         </ThemeProvider>{' '}
         <div className="user">
-          <span>Allen</span>
+          <span>{currentUser.username}</span>
         </div>
       </div>
     </div>

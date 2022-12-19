@@ -20,3 +20,8 @@ export const registerApi = async (payload: IRegisterPayload): Promise<any> => {
     console.log(error)
   })
 }
+
+export const fetchFriendSug = async (account: string) => {
+  const response = await api.get(`api/user/getFriendSug?id=${account}`)
+  return response
+}
