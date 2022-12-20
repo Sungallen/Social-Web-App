@@ -6,6 +6,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import Face6RoundedIcon from '@mui/icons-material/Face6Rounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded'
+import SocialDistance from '@mui/icons-material/SocialDistance'
 import { IconButton } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useAppSelector } from 'store/hooks'
@@ -26,6 +27,9 @@ export const Navbar = () => {
   const mainOnClick = () => {
     navigate('/main')
   }
+  const groupOnClick = () => {
+    navigate('/group')
+  }
   const onClick = () => {}
   return (
     <div className="navbar">
@@ -41,6 +45,11 @@ export const Navbar = () => {
         <ThemeProvider theme={theme}>
           <IconButton color="primary" onClick={mapOnClick}>
             <RoomRoundedIcon />
+          </IconButton>
+        </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <IconButton color="primary" onClick={groupOnClick}>
+            <SocialDistance />
           </IconButton>
         </ThemeProvider>
         <div className="search">
