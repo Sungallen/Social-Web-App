@@ -1,42 +1,40 @@
 import { Navbar } from 'features/profile/navbar/navbar'
-import { IEvent, TEventStatus } from 'features/types/group.types'
-import React from 'react'
+import CssBaseline from '@mui/material/CssBaseline'
 
-const data: IEvent[] = [
-  {
-    id: 'test',
-    name: 'test',
-    description: 'test',
-    created_time: new Date(),
-    owner: 'test',
-    members: ['test'],
-    image: 'test',
-    status: TEventStatus.END,
-  },
-]
+import Container from '@mui/material/Container'
+import Header from 'features/group/groupHeader'
+import EventCard from 'features/group/eventCard'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 
-const Card = () => (
-  <div>
-    <p>foo</p>
-    <p>foo</p>
-    <p>foo</p>
-    <p>foo</p>
-  </div>
-)
+// const dummyData: IBaseCardProps[] = [
+//   {
+//     id: 'test',
+//     name: 'test',
+//     description: 'test',
+//     created_time: new Date(),
+//     owner: 'test',
+//     members: ['test'],
+//     image: 'test',
+//     status: TEventStatus.END,
+//   },
+// ]
 
-const Header = () => (
+export const GroupPage = () => (
   <>
-    <h1>Find a group to join</h1>
-    <h3>Join groups to start meeting up and get suggestions based on what you join.</h3>
+    <div className="home">
+      <Navbar />
+    </div>
+    <CssBaseline />
+    <AddCircleOutlineIcon fontSize="large" />
+    add new one
+    <Container maxWidth="md">
+      <Header />
+      <EventCard />
+      <EventCard />
+      <EventCard />
+      <EventCard />
+    </Container>
   </>
 )
 
-export default function groupPage() {
-  return (
-    <div className="home">
-      <Navbar />
-      <Header />
-      <Card />
-    </div>
-  )
-}
+export default GroupPage

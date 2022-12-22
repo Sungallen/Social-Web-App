@@ -1,17 +1,29 @@
-export enum TEventStatus {
+export enum EventStatus {
   ONGOING = 'ONGOING',
   END = 'END',
   UPCOMING = 'UPCOMING',
 }
 
-export interface IEvent {
-  id: string
-  name: string
-  description: string
-  created_time: Date
-  end_time?: Date
-  owner: string
+export enum ViewState {
+  SHOW_EVENTS = 'SHOW_EVENTS',
+  SHOW_GROUPS = 'SHOW_GROUPS',
+}
+
+export interface IBaseCardProps {
+  id: string | number
+  title: string
+  description?: string
+  created_time: Date // when the event is created
+  event_time: Date | null // when the event is hold
+  place: string
+  author: string
   members?: string[] // who is the cohost
   image?: string // url
-  status?: TEventStatus
+  status?: EventStatus
 }
+export interface IEventCardProps extends IBaseCardProps {
+  current_attendees?: number
+  current_spot_left?: number
+}
+
+export type IGroupCardProps = IBaseCardProps

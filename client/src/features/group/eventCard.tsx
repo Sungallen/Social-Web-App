@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -14,6 +13,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { useState } from 'react'
+// import BasketballCourtImage from 'assets/basketballCourt.jpg'
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean
@@ -30,11 +31,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }))
 
-export const GroupCard = () => {
-  const [expanded, setExpanded] = React.useState(false)
+export const EventCard = () => {
+  const [expanded, setExpanded] = useState(false)
 
   const handleExpandClick = () => {
-    setExpanded(!expanded)
+    // setExpanded(!expanded)
   }
 
   return (
@@ -55,9 +56,9 @@ export const GroupCard = () => {
       />
       <CardMedia
         component="img"
-        height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
+        height="120"
+        image="/assets/basketballCourt.png"
+        alt="Basketball Court"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -112,4 +113,4 @@ export const GroupCard = () => {
   )
 }
 
-export default GroupCard
+export default EventCard
