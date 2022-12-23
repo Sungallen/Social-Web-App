@@ -38,7 +38,7 @@ export const ProfilePage: React.FC = () => {
       <Navbar />
       <div style={{ display: 'flex' }} className="leftbar">
         <LeftBar />
-        <div style={{ flex: 0.5 }} className="outlet">
+        <div style={{ flex: 0.1 }} className="outlet">
           <Outlet />
         </div>
         <div style={{ display: 'table-column' }} className="column">

@@ -27,7 +27,7 @@ export const Navbar = () => {
     navigate('/main')
   }
   const userInfoonClick = () => {
-    navigate('/user/   ')
+    navigate(`/user/${currentUser.account}`)
   }
   const onClick = () => {}
   return (
@@ -64,7 +64,7 @@ export const Navbar = () => {
           </IconButton>
         </ThemeProvider>{' '}
         <div className="user">
-          <IconButton onClick={onClick}>
+          <IconButton onClick={userInfoonClick}>
             <span>{currentUser.username}</span>
           </IconButton>
         </div>
