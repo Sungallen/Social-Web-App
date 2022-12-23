@@ -2,19 +2,19 @@ import { SagaIterator } from '@redux-saga/core'
 import { registerApi, userLoginApi } from 'features/hooks/user.api'
 import { takeEvery, call, CallEffect, put, PutEffect } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { ILoginActionPayload, IUser, IRegisterPayload } from 'features/types/user.types'
+import { ILoginActionPayload, IUser, IRegisterPayload, IUserLogin } from 'features/types/user.types'
 import { userActions, userSlice } from './user.slice'
 
-type TUser = Generator<CallEffect<void> | PutEffect<any>, void, string>
+type TUser = Generator<CallEffect<void> | PutEffect<any>, void, IUserLogin>
 
 function* userLogin(action: PayloadAction<ILoginActionPayload>): TUser {
-  const response: IUser[] | string = yield call(
+  const response: IUserLogin = yield call(
     userLoginApi,
     action.payload.account,
     action.payload.password,
   )
-  if (Array.isArray(response)) {
-    yield put(userSlice.actions.setUserInfo(response[0]))
+  if (response.token !== '') {
+    yield put(userSlice.actions.setUserInfo(response))
   }
 }
 
