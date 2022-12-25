@@ -11,7 +11,7 @@ export const Register = () => {
   const account = useRef<HTMLInputElement | null>(null)
   const username = useRef<HTMLInputElement | null>(null)
   const password = useRef<HTMLInputElement | null>(null)
-  const [age, setAge] = useState<string>('')
+  const [gender, setGender] = useState<string>('')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -19,23 +19,34 @@ export const Register = () => {
     navigate('/login')
   }
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value)
+    setGender(event.target.value)
   }
 
   const onRegister = (e: SyntheticEvent) => {
     e.preventDefault()
-    console.log(account.current?.value)
-    dispatch(
-      userActions.registerSaga(
-        email.current?.value,
-        account.current?.value,
-        username.current?.value,
-        password.current?.value,
-        new Date(),
-        Number(age),
-      ),
-    )
-    navigate('/login')
+    console.log(username.current?.value)
+    if (
+      email.current?.value === '' ||
+      account.current?.value === '' ||
+      username.current?.value === '' ||
+      password.current?.value === '' ||
+      gender === ''
+    ) {
+      console.log('plz input again')
+    } else {
+      console.log('success to dispatch your data')
+      dispatch(
+        userActions.registerSaga(
+          email.current?.value,
+          account.current?.value,
+          username.current?.value,
+          password.current?.value,
+          new Date(),
+          Number(gender),
+        ),
+      )
+      navigate('/login')
+    }
   }
 
   return (
@@ -55,13 +66,13 @@ export const Register = () => {
             <input type="text" placeholder="Account" ref={account} />
             <input type="text" placeholder="Password" ref={password} />
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+              <InputLabel id="demo-simple-select-standard-label">Gender</InputLabel>
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
-                value={age}
+                value={gender}
                 onChange={handleChange}
-                label="Age"
+                label="Gender"
               >
                 <MenuItem value="">
                   <em>None</em>
