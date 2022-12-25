@@ -1,4 +1,4 @@
-export enum EventStatus {
+export enum TEventStatus {
   ONGOING = 'ONGOING',
   END = 'END',
   UPCOMING = 'UPCOMING',
@@ -19,7 +19,7 @@ export interface IBaseCardProps {
   author: string
   members?: string[] // who is the cohost
   image?: string // url
-  status?: EventStatus
+  status?: TEventStatus
 }
 export interface IEventCardProps extends IBaseCardProps {
   current_attendees?: number

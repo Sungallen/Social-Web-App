@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {
+  Button,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -9,9 +10,14 @@ import {
 } from '@mui/material'
 import Box from '@mui/material/Box'
 import { ViewState } from 'features/types/group.types'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
+import { groupSlice } from 'features/store/group.slice'
 
+// TODO make this header sticky
 export const Header = () => {
-  const [viewState, setViewState] = useState<ViewState>(ViewState.SHOW_EVENTS)
+  // const [viewState, setViewState] = useState<ViewState>(ViewState.SHOW_EVENTS)
+  const dispatch = useAppDispatch()
+  const viewState = useAppSelector(state => state.group.viewState)
   return (
     <>
       <Box
@@ -24,28 +30,32 @@ export const Header = () => {
           borderRadius: 1,
         }}
       >
-        <Typography
-          variant="h5"
-          component="h5"
-          mt="2rem"
-          mr="2rem"
-          onClick={() => {
-            setViewState(ViewState.SHOW_EVENTS)
-          }}
-        >
-          Events
-        </Typography>
-        <Typography
-          variant="h5"
-          component="h5"
-          mt="2rem"
-          mr="2rem"
-          onClick={() => {
-            setViewState(ViewState.SHOW_GROUPS)
-          }}
-        >
-          Groups
-        </Typography>
+        <Button>
+          <Typography
+            variant="h5"
+            component="h5"
+            mt="2rem"
+            mr="2rem"
+            onClick={() => {
+              dispatch(groupSlice.actions.setViewState(ViewState.SHOW_EVENTS))
+            }}
+          >
+            Events
+          </Typography>
+        </Button>
+        <Button>
+          <Typography
+            variant="h5"
+            component="h5"
+            mt="2rem"
+            mr="2rem"
+            onClick={() => {
+              dispatch(groupSlice.actions.setViewState(ViewState.SHOW_GROUPS))
+            }}
+          >
+            Groups
+          </Typography>
+        </Button>
       </Box>
       <Box
         sx={{

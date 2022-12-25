@@ -30,7 +30,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }))
 
-export const GroupCard = () => {
+export const GroupCard = ({ groupCardId }: { groupCardId: string }) => {
   const [expanded, setExpanded] = React.useState(false)
 
   const handleExpandClick = () => {
@@ -50,13 +50,13 @@ export const GroupCard = () => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={`${groupCardId}th Group `}
         subheader="September 14, 2016"
       />
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
+        image="http://localhost:4000/api/user/image?path=/server/media/group_pictures/basketball_court.png"
         alt="Paella dish"
       />
       <CardContent>

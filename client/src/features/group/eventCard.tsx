@@ -14,6 +14,7 @@ import ShareIcon from '@mui/icons-material/Share'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 // import BasketballCourtImage from 'assets/basketballCourt.jpg'
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -31,33 +32,39 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }))
 
-export const EventCard = () => {
+export const EventCard = ({ eventCardId }: { eventCardId: string }) => {
   const [expanded, setExpanded] = useState(false)
 
   const handleExpandClick = () => {
     // setExpanded(!expanded)
   }
 
+  const navigate = useNavigate()
+
+  const handleRedirectClick = () => {
+    navigate(`/group/${eventCardId}`)
+  }
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 500, margin: 3, padding: 3 }} onClick={handleRedirectClick}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             R
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
+        title={`${eventCardId}th Event `}
         subheader="September 14, 2016"
       />
       <CardMedia
         component="img"
         height="120"
-        image="/assets/basketballCourt.png"
+        image="http://localhost:4000/api/user/image?path=/server/media/group_pictures/basketball_court.png"
         alt="Basketball Court"
       />
       <CardContent>
@@ -67,19 +74,25 @@ export const EventCard = () => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        {/* <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
-        </IconButton>
+        </IconButton> */}
         <ExpandMore
           expand={expanded}
-          onClick={handleExpandClick}
+          // onClick={handleExpandClick}
+          onClick={handleRedirectClick}
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          {/* <ExpandMoreIcon /> */}
+
+          {/* <Link to={`/group/${eventCardId}`}>learn more</Link> */}
+          <IconButton aria-label="share" onClick={handleRedirectClick}>
+            <ShareIcon />
+          </IconButton>
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>

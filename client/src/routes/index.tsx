@@ -1,3 +1,4 @@
+import EventCardInfo from 'features/group/eventCardInfo'
 import React, { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
@@ -17,6 +18,7 @@ const AppRoutes = () => (
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/group" element={<GroupPage />} />
+        <Route path="/group/:id" element={<EventCardInfo />} />
         <Route path="/user/:id" element={<UserInfoPage />} />
       </Routes>
     </Suspense>
