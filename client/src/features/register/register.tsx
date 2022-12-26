@@ -61,7 +61,7 @@ export const Register = () => {
         <div className="right">
           <h1>Register</h1>
           <form onSubmit={onRegister}>
-            <input type="text" placeholder="Email" ref={email} />
+            <input type="email" placeholder="Email" ref={email} />
             <input type="text" placeholder="Username" ref={username} />
             <input type="text" placeholder="Account" ref={account} />
             <input type="text" placeholder="Password" ref={password} />
