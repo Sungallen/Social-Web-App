@@ -273,6 +273,3 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-11-10 15:17:36
--- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'csl92021164';
--- GRANT ALL ON Sport_Social.* TO 'root'@'localhost';
--- flush privileges;
