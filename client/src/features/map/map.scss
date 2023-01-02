@@ -1,0 +1,47 @@
+.login {
+  height: 100vh;
+  display: flex;
+  border-left: 3px;
+  margin-left: 65%;
+  .card {
+    width: 100%;
+    height: 100%;
+    display: table-column;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    .top {
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .bottom {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      justify-content: center;
+
+      h1 {
+        color: #555;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
+    .rating {
+      flex-direction: row;
+      justify-content: center;
+      margin-left: 20px;
+    }
+    .rating1 {
+      margin-top: 40px;
+      flex-direction: row;
+      justify-content: center;
+      margin-left: 20px;
+    }
+  }
+}
