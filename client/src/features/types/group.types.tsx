@@ -1,3 +1,5 @@
+import { IUser, IUserSlice } from './user.types'
+
 export enum TEventStatus {
   ONGOING = 'ONGOING',
   END = 'END',
@@ -12,12 +14,12 @@ export enum ViewState {
 export interface IBaseCardProps {
   id: string | number
   title: string
-  description?: string
-  created_time: Date // when the event is created
-  event_time: Date | null // when the event is hold
+  description: string
+  created_time?: Date // when the event is created
+  event_time?: Date // when the event is hold
   place: string
   author: string
-  members?: string[] // who is the cohost
+  members?: IUser[] // who is the cohost
   image?: string // url
   status?: TEventStatus
 }
@@ -26,4 +28,9 @@ export interface IEventCardProps extends IBaseCardProps {
   current_spot_left?: number
 }
 
-export type IGroupCardProps = IBaseCardProps
+export interface IGroupCardProps extends IBaseCardProps {
+  current_attendees?: number
+  current_spot_left?: number
+}
+
+// export type IGroupCardProps = IBaseCardProps

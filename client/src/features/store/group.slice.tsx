@@ -1,40 +1,40 @@
 import { createAction, createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
-import { ViewState } from 'features/types/group.types'
+import { IGroupCardProps, ViewState } from 'features/types/group.types'
 
-const initialState = { viewState: ViewState.SHOW_EVENTS }
+export interface IGroupState {
+  viewState: ViewState
+  groups: IGroupCardProps[]
+}
+
+const initialState: IGroupState = { viewState: ViewState.SHOW_EVENTS, groups: [] }
 
 export const groupSlice = createSlice({
-  name: 'user',
+  name: 'group',
   initialState,
   reducers: {
+    fetchAllSucceeded(state, action: PayloadAction<IGroupCardProps[]>) {
+      state.groups = action.payload
+    },
     setViewState(state, action: PayloadAction<ViewState>) {
       state.viewState = action.payload
     },
   },
 })
 
-// export const userActions = {
-//   loginSaga: createAction(
-//     `${userSlice.name}/loginSaga`,
-//     (account: string | undefined, password: string | undefined) => ({
-//       payload: { account, password },
-//     }),
-//   ),
-//   submitPostSaga: createAction(
-//     `${userSlice}/postSaga`,
-//     (content: string | undefined, image: File | null) => ({ payload: { content, image } }),
-//   ),
-//   registerSaga: createAction(
-//     `${userSlice.name}/registerSaga`,
-//     (
-//       email: string | undefined,
-//       username: string | undefined,
-//       account: string | undefined,
-//       password: string | undefined,
-//       created_time: Date,
-//       gender: number,
-//     ) => ({ payload: { email, username, account, password, created_time, gender } }),
-//   ),
-// }
+export const groupActions = {
+  loginSaga: createAction(
+    `${groupSlice.name}/loginSaga`,
+    (account: string | undefined, password: string | undefined) => ({
+      payload: { account, password },
+    }),
+  ),
+  createNewGroupSaga: createAction(`${groupSlice.name}/create`, (group: any) => ({
+    payload: { id: nanoid(), title: group.title, body: group.body },
+  })),
+  fetchAllGroupSaga: createAction(`${groupSlice.name}/fetchAll`),
+  fetchAllSucceededSaga: groupSlice.actions.fetchAllSucceeded,
+  // update: createAction<Post>(`${groupSlice.name}/update`),
+  // delete: createAction<Post>(`${groupSlice.name}/delete`),
+}
 
 export default groupSlice.reducer

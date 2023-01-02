@@ -10,6 +10,7 @@ import {
 import { Box } from '@mui/system'
 import { Navbar } from 'features/profile/navbar/navbar'
 import { cyan, red } from '@mui/material/colors'
+import CircleIcon from '@mui/icons-material/Circle'
 import Header from './groupHeader'
 
 export const EventCardInfo = () => (
@@ -106,6 +107,16 @@ export const EventCardInfo = () => (
         }}
       >
         Status
+      </Typography>
+      <Typography
+        mt="2rem"
+        mr="2rem"
+        onClick={() => {
+          // dispatch(groupSlice.actions.setViewState(ViewState.SHOW_EVENTS))
+        }}
+      >
+        <CircleIcon style={{ color: 'brown', marginRight: '4px' }} />
+        On Going
       </Typography>
 
       <Typography

@@ -10,6 +10,7 @@ import SocialDistance from '@mui/icons-material/SocialDistance'
 import { IconButton } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useAppSelector } from 'store/hooks'
+import { Children } from 'react'
 
 const theme = createTheme({
   palette: {
@@ -29,11 +30,10 @@ export const Navbar = () => {
   }
   const groupOnClick = () => {
     navigate('/group')
-    const userInfoonClick = () => {
-      navigate(`/user/${currentUser.account}`)
-    }
-    const onClick = () => {}
-    return (
+  }
+  const onClick = () => {}
+  return (
+    <>
       <div className="navbar">
         <div className="left">
           <Link to="/" style={{ textDecoration: 'none' }}>
@@ -72,12 +72,10 @@ export const Navbar = () => {
             </IconButton>
           </ThemeProvider>{' '}
           <div className="user">
-            <IconButton onClick={userInfoonClick}>
-              <span>{currentUser.username}</span>
-            </IconButton>
+            <span>{currentUser.username}</span>
           </div>
         </div>
       </div>
-    )
-  }
+    </>
+  )
 }
