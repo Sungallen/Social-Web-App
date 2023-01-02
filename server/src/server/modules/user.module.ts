@@ -1,3 +1,4 @@
+import { ResultSetHeader } from "mysql2";
 import { neo4jUserRegister } from "../database_operations/neo4j.operations";
 import query from "../database_operations/operations";
 import { generateAccessToken } from "../helpers/authetication";
@@ -17,7 +18,7 @@ const register = (insertValues: IRegisterbody): Promise<IRegisterRes> =>
         insertValues.email,
       ]
     )
-      .then((result) => {
+      .then((result: ResultSetHeader) => {
         if (result.affectedRows === 1) {
           const neo4jResult = neo4jUserRegister(
             `CREATE (n: user {id: ${result.insertId}})`
@@ -74,10 +75,11 @@ export const loginModule = (account: string, password: string): Promise<any> =>
         } else if (password !== queryObject[0].password) {
           resolve("The password is not correct");
         } else {
-          const accessToken = generateAccessToken(queryObject[0])
+          const accessToken = generateAccessToken(queryObject[0]);
           resolve({
             user: queryObject,
-            token: accessToken});
+            token: accessToken,
+          });
         }
       })
       .catch((error) => {

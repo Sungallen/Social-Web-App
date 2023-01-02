@@ -4,7 +4,8 @@ import RightBar from 'features/profile/rightbar/rightbar'
 import { UserInfo } from 'features/userInfo/userInfo'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { IPost } from './types'
+import { IPost } from '../types'
+import './userInfoPage.scss'
 
 export const UserInfoPage: React.FC = () => {
   const post: IPost[] = [
@@ -32,7 +33,7 @@ export const UserInfoPage: React.FC = () => {
     },
   ]
   return (
-    <div>
+    <div className="home">
       <Navbar />
       <div style={{ display: 'flex' }}>
         <LeftBar />

@@ -6,8 +6,9 @@ const LoginPage = React.lazy(() => import('pages/loginPage'))
 const ProfilePage = React.lazy(() => import('pages/profilePage/profilePage'))
 const RegisterPage = React.lazy(() => import('pages/registerPage'))
 const MapPage = React.lazy(() => import('pages/mapPage'))
-const UserInfoPage = React.lazy(() => import('pages/userInfoPage'))
+const UserInfoPage = React.lazy(() => import('pages/userInfoPage/userInfoPage'))
 const GroupPage = React.lazy(() => import('pages/groupPage'))
+// const UserInfoPage = React.lazy(() => import('pages/userInfoPage/userInfoPage'))
 
 const AppRoutes = () => (
   <>

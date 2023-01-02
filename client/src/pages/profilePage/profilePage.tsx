@@ -1,4 +1,4 @@
-import Post from 'features/post/post'
+import './profilePage.scss'
 import Posts from 'features/post/posts'
 import Share from 'features/postSend/postSend'
 import { LeftBar } from 'features/profile/leftbar/leftbar'
@@ -34,14 +34,14 @@ export const ProfilePage: React.FC = () => {
     },
   ]
   return (
-    <div className='home'>
+    <div className="home">
       <Navbar />
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex' }} className="leftbar">
         <LeftBar />
-        <div style={{ flex: 0.5 }}>
+        <div style={{ flex: 0.1 }} className="outlet">
           <Outlet />
         </div>
-        <div style={{ display: 'table-column' }}>
+        <div style={{ display: 'table-column' }} className="column">
           <Share />
           <Posts />
         </div>

@@ -1,8 +1,9 @@
-import mysql, { MysqlError, OkPacket } from "mysql";
+import mysql2, { RowDataPacket, OkPacket, ResultSetHeader } from "mysql2";
+import { MysqlError } from "mysql";
 import config from "../../config/config";
 import _error from "../helpers/error";
 
-const connectionPool = mysql.createPool({
+const connectionPool = mysql2.createPool({
   connectionLimit: 10,
   host: config.mysqlHost,
   user: config.mysqlUserName,
@@ -12,7 +13,13 @@ const connectionPool = mysql.createPool({
 });
 
 const query = (queryString: string, queryParameter: Array<any> | any) =>
-  new Promise<OkPacket>((resolve, reject) => {
+  new Promise<
+    | RowDataPacket[]
+    | RowDataPacket[][]
+    | OkPacket
+    | OkPacket[]
+    | ResultSetHeader
+  >((resolve, reject) => {
     connectionPool.getConnection((connectionError, connection) => {
       if (connectionError) {
         reject(_error.APIError(connectionError));

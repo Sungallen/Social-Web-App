@@ -1,0 +1,43 @@
+version: "3.7"
+
+networks:
+  social_web:
+    driver: bridge
+
+services:
+  mysql:
+    image: mysql:8.0.30
+    container_name: sport-social-mysql
+    # platform: linux/amd64 # MacOS M1 users, please uncomment this line
+    volumes:
+      - ./mysql_utils:/utils:rw
+    ports:
+      - "3309:3306"
+    expose:
+      - "3309"
+    environment:
+      MYSQL_DATABASE: "Sport_Social"
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_PASSWORD: "csl92021164"
+      MYSQL_ROOT_PASSWORD: "csl92021164"
+    networks:
+      - social_web
+
+  neo4j:
+    image: bitnami/neo4j:latest
+    networks:
+      - social_web
+    ports:
+      - "7475:7474"
+      - "7688:7687"
+    expose:
+      - "7475"
+      - "7688"
+    environment:
+      - NEO4J_BOLT_PORT_NUMBER=7688
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "echo RETURN 1 | cypher-shell -a <NEO4J_dbms_connector_bolt_listen__address> -u <user defined username> -p <user defined password> || exit 1",
+        ]

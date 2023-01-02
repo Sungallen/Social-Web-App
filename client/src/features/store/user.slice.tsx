@@ -1,5 +1,5 @@
 import { createAction, createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
-import { IUser, IUserSlice } from 'features/types/user.types'
+import { IUserLogin, IUserSlice } from 'features/types/user.types'
 
 const initialState: IUserSlice = {
   username: '',
@@ -8,19 +8,21 @@ const initialState: IUserSlice = {
   created_time: new Date(),
   gender: 0,
   loginStatus: '',
+  token: '',
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserInfo(state, action: PayloadAction<IUser>) {
-      state.username = action.payload.username
-      state.email = action.payload.email
-      state.account = action.payload.account
-      state.created_time = new Date(action.payload.created_time)
-      state.gender = action.payload.gender
+    setUserInfo(state, action: PayloadAction<IUserLogin>) {
+      state.username = action.payload.user[0].username
+      state.email = action.payload.user[0].email
+      state.account = action.payload.user[0].account
+      state.created_time = new Date(action.payload.user[0].created_time)
+      state.gender = action.payload.user[0].gender
       state.loginStatus = 'Login'
+      state.token = action.payload.token
     },
   },
 })
