@@ -4,13 +4,13 @@ import Container from '@mui/material/Container'
 import Header from 'features/group/groupHeader'
 import EventCard from 'features/group/eventCard'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import GroupCard from 'features/group/groupCard'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { IEventCardProps, ViewState } from 'features/types/group.types'
 import { Button } from '@mui/material'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import useGroupService from 'features/hooks/useGroupService'
 import { groupActions } from 'features/store/group.slice'
+import { useDevToken } from 'features/hooks/useToken'
 
 export interface IEventCardListProps {
   cards?: Array<IEventCardProps>
@@ -19,16 +19,19 @@ export interface IEventCardListProps {
 export const GroupPage: React.FC = () => {
   const viewState = useAppSelector(state => state.group.viewState)
   const dispatch = useAppDispatch()
-  const { groups, fetchAllGroups } = useGroupService()
+  const { token } = useAppSelector(state => state.user)
+
+  const devToken = useDevToken()
+
+  const groupsCallBack = useCallback(() => {
+    if (token === '' && devToken !== '') {
+      dispatch(groupActions.fetchAllGroupSaga(devToken))
+    }
+  }, [token, devToken, dispatch])
 
   useEffect(() => {
-    fetchAllGroups()
-  }, [fetchAllGroups])
-
-  const payload = {
-    title: 'test',
-    body: 'test',
-  }
+    groupsCallBack()
+  }, [groupsCallBack])
 
   const onCreateNewGroup = () => {
     dispatch(groupActions.createNewGroupSaga({ title: 'test' }))
@@ -49,7 +52,7 @@ export const GroupPage: React.FC = () => {
         {/* {viewState === ViewState.SHOW_EVENTS ? EventCards : GroupCards} */}
         {/* map event cars */}
 
-        {viewState === ViewState.SHOW_EVENTS
+        {/* {viewState === ViewState.SHOW_EVENTS
           ? groups.map((card, k) => (
               <EventCard
                 key={k}
@@ -69,7 +72,7 @@ export const GroupPage: React.FC = () => {
                 description={card.description}
                 place={card.place}
               />
-            ))}
+            ))} */}
       </Container>
     </>
   )

@@ -1,23 +1,30 @@
 import { SagaIterator } from '@redux-saga/core'
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { createGroup, getGroups } from 'features/hooks/groups.api'
-import { IGroupCardProps } from 'features/types/group.types'
-import { groupActions } from 'features/store/group.slice'
+import { createNewGroupApi, getGroupsApi } from 'features/hooks/groups.api'
+import { IGroup, IGroupCardProps } from 'features/types/group.types'
+import { groupActions, groupSlice } from 'features/store/group.slice'
+import { PayloadAction } from '@reduxjs/toolkit'
 
 // Worker Sagas
-export function* onGetGroups(): SagaIterator {
-  const groups: IGroupCardProps[] = yield call(getGroups)
-  yield put(groupActions.fetchAllSucceededSaga(groups))
+// export function* onGetPosts(): SagaIterator {
+//   const posts: Post[] = yield call(getPosts)
+//   yield put(postsActions.fetchAllSucceeded(posts))
+// }
+
+// Worker Sagas
+export function* onGetGroups(action: PayloadAction<any>): SagaIterator {
+  const res = yield call(getGroupsApi, action.payload.token)
+  yield put(groupSlice.actions.setGroupList(res))
 }
 
 function* onCreateGroup({
   payload,
 }: {
   type: typeof groupActions.createNewGroupSaga
-  payload: IGroupCardProps | any
+  payload: IGroup
 }): SagaIterator {
-  yield call(createGroup, payload)
-  yield put(groupActions.fetchAllGroupSaga())
+  yield call(createNewGroupApi, payload)
+  yield put(groupActions.createNewGroupSaga(payload))
 }
 
 // function* onUpdatePost({
@@ -43,9 +50,9 @@ function* onCreateGroup({
 // Watcher Saga
 export function* groupsWatcherSaga(): SagaIterator {
   yield takeEvery(groupActions.fetchAllGroupSaga.type, onGetGroups)
+  yield takeEvery(groupActions.createNewGroupSaga.type, onCreateGroup)
   // yield takeEvery(postsActions.update.type, onUpdatePost)
   //   yield takeEvery(postsActions.delete.type, onDeletePost)
-  yield takeEvery(groupActions.createNewGroupSaga.type, onCreateGroup)
 }
 
 export default groupsWatcherSaga
