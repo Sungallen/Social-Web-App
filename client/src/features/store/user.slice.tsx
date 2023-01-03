@@ -24,6 +24,9 @@ export const userSlice = createSlice({
       state.loginStatus = 'Login'
       state.token = action.payload.token
     },
+    setTestingToken(state, action: PayloadAction<string>) {
+      state.token = action.payload
+    },
   },
 })
 

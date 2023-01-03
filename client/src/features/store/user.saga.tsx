@@ -19,7 +19,6 @@ function* userLogin(action: PayloadAction<ILoginActionPayload>): TUser {
 }
 
 function* userRegister(action: PayloadAction<IRegisterPayload>): TUser {
-  console.log(action.payload)
   yield call(registerApi, action.payload)
 }
 

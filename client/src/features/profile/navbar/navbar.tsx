@@ -6,9 +6,11 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import Face6RoundedIcon from '@mui/icons-material/Face6Rounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded'
+import SocialDistance from '@mui/icons-material/SocialDistance'
 import { IconButton } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useAppSelector } from 'store/hooks'
+import { Children } from 'react'
 
 const theme = createTheme({
   palette: {
@@ -26,49 +28,54 @@ export const Navbar = () => {
   const mainOnClick = () => {
     navigate('/main')
   }
-  const userInfoonClick = () => {
-    navigate(`/user/${currentUser.account}`)
+  const groupOnClick = () => {
+    navigate('/group')
   }
   const onClick = () => {}
   return (
-    <div className="navbar">
-      <div className="left">
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          <span> Sport_Social </span>
-        </Link>
-        <ThemeProvider theme={theme}>
-          <IconButton color="primary" onClick={mainOnClick}>
-            <HomeRoundedIcon />
-          </IconButton>
-        </ThemeProvider>
-        <ThemeProvider theme={theme}>
-          <IconButton color="primary" onClick={mapOnClick}>
-            <RoomRoundedIcon />
-          </IconButton>
-        </ThemeProvider>
-        <div className="search">
-          <SearchRoundedIcon />
-          <input type="text" placeholder="Search..." />
+    <>
+      <div className="navbar">
+        <div className="left">
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <span> Sport_Social </span>
+          </Link>
+          <ThemeProvider theme={theme}>
+            <IconButton color="primary" onClick={mainOnClick}>
+              <HomeRoundedIcon />
+            </IconButton>
+          </ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <IconButton color="primary" onClick={mapOnClick}>
+              <RoomRoundedIcon />
+            </IconButton>
+          </ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <IconButton color="primary" onClick={groupOnClick}>
+              <SocialDistance />
+            </IconButton>
+          </ThemeProvider>
+          <div className="search">
+            <SearchRoundedIcon />
+            <input type="text" placeholder="Search..." />
+          </div>
         </div>
-      </div>
-      <div className="right">
-        <Face6RoundedIcon />
-        <ThemeProvider theme={theme}>
-          <IconButton color="primary" onClick={onClick}>
-            <EmailRoundedIcon />
-          </IconButton>
-        </ThemeProvider>
-        <ThemeProvider theme={theme}>
-          <IconButton color="primary" onClick={onClick}>
-            <NotificationsRoundedIcon />
-          </IconButton>
-        </ThemeProvider>{' '}
-        <div className="user">
-          <IconButton onClick={userInfoonClick}>
+        <div className="right">
+          <Face6RoundedIcon />
+          <ThemeProvider theme={theme}>
+            <IconButton color="primary" onClick={onClick}>
+              <EmailRoundedIcon />
+            </IconButton>
+          </ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <IconButton color="primary" onClick={onClick}>
+              <NotificationsRoundedIcon />
+            </IconButton>
+          </ThemeProvider>{' '}
+          <div className="user">
             <span>{currentUser.username}</span>
-          </IconButton>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
