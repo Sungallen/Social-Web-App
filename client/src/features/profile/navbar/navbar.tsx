@@ -28,6 +28,9 @@ export const Navbar = () => {
   const mainOnClick = () => {
     navigate('/main')
   }
+  const userInfoonClick = () => {
+    navigate(`/user/${currentUser.account}`)
+  }
   const groupOnClick = () => {
     navigate('/group')
   }
@@ -72,7 +75,9 @@ export const Navbar = () => {
             </IconButton>
           </ThemeProvider>{' '}
           <div className="user">
-            <span>{currentUser.username}</span>
+            <IconButton onClick={userInfoonClick} style={{ color: 'black' }}>
+              <span>{currentUser.username}</span>
+            </IconButton>
           </div>
         </div>
       </div>

@@ -10,6 +10,6 @@ router.get("/", (req: Request, res: Response) => {
 });
 router.use("/user", userRouter);
 router.use("/court", courtRouter);
-router.use("/group", groupRouter);
+// router.use("/group", groupRouter);
 
 export default router;
