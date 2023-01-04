@@ -1,6 +1,6 @@
 import Env from 'config/env'
 import makeApi from 'lib/apiConfiguration'
-import { IRegisterPayload } from 'features/types/user.types'
+import { IFriendSug, IRegisterPayload } from 'features/types/user.types'
 
 const api = makeApi(`${Env.API_BASE_URL}`)
 
@@ -17,11 +17,15 @@ export const registerApi = async (payload: IRegisterPayload): Promise<any> => {
     gender: payload.gender,
   }
   return api.post(`/api/user/register`, temp).catch(error => {
-    console.log(error)
+    // console.log(error)
   })
 }
 
-export const fetchFriendSug = async (account: string) => {
-  const response = await api.get(`api/user/getFriendSug?id=${account}`)
+export const fetchFriendSug = async (token: string) => {
+  const response: IFriendSug[] = await api.get(`api/user/randomgetusers`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  })
   return response
 }
