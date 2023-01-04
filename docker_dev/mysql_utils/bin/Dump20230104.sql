@@ -101,7 +101,7 @@ CREATE TABLE `courts` (
   `longitude` float NOT NULL,
   `latitude` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,6 +110,7 @@ CREATE TABLE `courts` (
 
 LOCK TABLES `courts` WRITE;
 /*!40000 ALTER TABLE `courts` DISABLE KEYS */;
+INSERT INTO `courts` VALUES (1,'福?河濱�?樾x球場','/server/media/courts/1.jpg',0,'臺北市�h林區延平北�7段27巷堤�酙�','00:00:00','00:00:00',121.495,25.095),(2,'穉洲河濱�?樾x球場','/server/media/courts/2.jpg',0,'臺北市�h林區延平北�9段近��洲運動�?�鋳道','00:00:00','00:00:00',121.476,25.1051),(3,'觀�s河濱�?樾x球場','/server/media/courts/3.jpg',0,'台北市松�s區塔悠街與�?殿�389巷交�e�f(基6㧜�籅鬤i�J)','00:00:00','00:00:00',121.57,25.0704),(4,'光?籃球場籃球場','/server/media/courts/4.jpg',0,'台北市冧華區環河快速道�(冧�j�)98㧜附近','00:00:00','00:00:00',121.49,25.0249),(5,'延平河濱�?樾x球場','/server/media/courts/5.jpg',0,'�榀�抂?延平北�9段��洲抽�纀�','00:00:00','00:00:01',121.506,25.0539),(6,'古亭河濱�?樾x球場','/server/media/courts/6.png',0,'福和抂?��正抂間','00:00:00','00:00:00',121.526,25.0145),(7,'溪洲[福和]河濱�?樾x球場','/server/media/courts/7.jpeg',0,'福和抂�U鑬2㧜��緥門','00:00:00','00:00:00',121.535,24.999),(8,'��正河濱�?��正籃球場','/server/media/courts/8.jpg',0,'台北市�艩��堤�鮝� (��正抂�U)','00:00:00','00:00:00',121.514,25.0235),(9,'雙園河濱�?樾x球場','/server/media/courts/9.jpg',0,'雙園抽�纀�?華飵抂�W?�䊢瑽凇�','00:00:00','00:00:00',121.488,25.0337);
 /*!40000 ALTER TABLE `courts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,8 +216,6 @@ CREATE TABLE `posts` (
   `image` varchar(45) DEFAULT NULL,
   `timestamp` datetime NOT NULL,
   `numlike` int NOT NULL DEFAULT '0',
-  `title` varchar(200) NOT NULL,
-  `type` varchar(45) NOT NULL,
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_posts_1_idx` (`user_id`),
@@ -251,7 +250,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,6 +259,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (258,'Allen',1,'2022-12-12 00:31:21','Allen','1017','allen@gmail.com'),(259,'Bennt',2,'2022-12-12 00:47:35','Benny','123456','123@gmail'),(260,'Allen',1,'2022-10-11 00:00:01','Allen10197','123456','sungallen@1234456782313'),(261,'Allen',1,'2022-10-11 00:00:01','Allen10197','123456','sungallen@12344567823133');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -272,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-10 15:17:36
+-- Dump completed on 2023-01-04 11:50:17
