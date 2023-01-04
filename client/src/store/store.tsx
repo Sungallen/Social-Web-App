@@ -6,6 +6,7 @@ import { createReduxHistoryContext } from 'redux-first-history'
 import logger from 'redux-logger'
 import { rootSaga } from 'store/root.saga'
 import userReducer from 'features/store/user.slice'
+import groupReducer from 'features/store/group.slice'
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
@@ -19,6 +20,7 @@ const makeStore = () => {
   const store = configureStore({
     reducer: {
       user: userReducer,
+      group: groupReducer,
       router: routerReducer,
     },
     devTools: Env.isDev(),
