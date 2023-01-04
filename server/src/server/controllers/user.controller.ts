@@ -1,4 +1,7 @@
-import register, { loginModule } from "../modules/user.module";
+import register, {
+  loginModule,
+  randomQueryUsers,
+} from "../modules/user.module";
 import {
   IRegisterbody,
   IRegisterRes,
@@ -6,6 +9,7 @@ import {
 } from "../types/user.type";
 import { Response, Request } from "express";
 import { dirname } from "path";
+import { Result } from "neo4j-driver";
 
 export const registerController = (
   req: TypedRequestBody<IRegisterbody>,
@@ -45,4 +49,13 @@ export const login = (
     .catch((error) => {
       res.status(400).send(error);
     });
+};
+
+export const randomSelUsers = (req: TypedRequestBody<null>, res: Response) => {
+  console.log(req.user);
+  randomQueryUsers(req.user.id)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => res.status(400).send(error));
 };

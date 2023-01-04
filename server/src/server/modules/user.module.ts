@@ -36,6 +36,7 @@ const register = (insertValues: IRegisterbody): Promise<IRegisterRes> =>
         }
       })
       .catch((error) => {
+        console.log(error);
         reject(error);
       });
   });
@@ -87,6 +88,20 @@ export const loginModule = (account: string, password: string): Promise<any> =>
       });
   });
 
+export const randomQueryUsers = (userId: number): Promise<IUser[] | IUser> =>
+  new Promise((resolve, reject) => {
+    query(
+      "SELECT id, username, image FROM users WHERE id != ? ORDER BY RAND() LIMIT 5 ",
+      [userId]
+    )
+      .then((result) => {
+        let queryObject: IUser[] | IUser = Object.values(
+          JSON.parse(JSON.stringify(result))
+        );
+        resolve(queryObject);
+      })
+      .catch((error) => reject(error));
+  });
 // export const getFriendSug = (account: string): Promise<any> =>
 //   new Promise((resolve, reject) => {
 //     query();

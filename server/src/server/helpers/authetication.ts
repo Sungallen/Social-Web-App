@@ -14,6 +14,7 @@ export const autheticateToken = (req: any, res: Response, next: any) => {
   JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     console.log(err);
     if (err) return res.sendStatus(403);
+    console.log(user);
     req.user = user;
     next();
   });

@@ -247,10 +247,12 @@ CREATE TABLE `users` (
   `account` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `image` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `image_UNIQUE` (`image`)
+) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +261,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (258,'Allen',1,'2022-12-12 00:31:21','Allen','1017','allen@gmail.com'),(259,'Bennt',2,'2022-12-12 00:47:35','Benny','123456','123@gmail'),(260,'Allen',1,'2022-10-11 00:00:01','Allen10197','123456','sungallen@1234456782313'),(261,'Allen',1,'2022-10-11 00:00:01','Allen10197','123456','sungallen@12344567823133');
+INSERT INTO `users` VALUES (258,'Allen',1,'2022-12-12 00:31:21','Allen','1017','allen@gmail.com','/server/media/users/258/258.jpg'),(259,'Bennt',2,'2022-12-12 00:47:35','Benny','123456','123@gmail','/server/media/users/259/259.jpg'),(266,'allen3',1,'2023-01-04 06:47:07','allen3','1017','12345@gmail','/server/media/users/266/266.jpeg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -272,4 +274,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-04 11:50:17
+-- Dump completed on 2023-01-04 19:58:33

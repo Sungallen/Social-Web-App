@@ -35,3 +35,9 @@ export interface IRegisterPayload {
   created_time: Date
   gender: number
 }
+
+export interface IFriendSug {
+  id: number
+  username: string
+  image: string
+}
