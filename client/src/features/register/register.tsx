@@ -11,7 +11,7 @@ export const Register = () => {
   const account = useRef<HTMLInputElement | null>(null)
   const username = useRef<HTMLInputElement | null>(null)
   const password = useRef<HTMLInputElement | null>(null)
-  const [age, setAge] = useState<string>('')
+  const [gender, setGender] = useState<string>('')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -19,7 +19,7 @@ export const Register = () => {
     navigate('/login')
   }
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value)
+    setGender(event.target.value)
   }
 
   const onRegister = (e: SyntheticEvent) => {
@@ -32,7 +32,7 @@ export const Register = () => {
         username.current?.value,
         password.current?.value,
         new Date(),
-        Number(age),
+        Number(gender),
       ),
     )
     navigate('/login')
@@ -50,18 +50,55 @@ export const Register = () => {
         <div className="right">
           <h1>Register</h1>
           <form onSubmit={onRegister}>
-            <input type="text" placeholder="Email" ref={email} />
-            <input type="text" placeholder="Username" ref={username} />
-            <input type="text" placeholder="Account" ref={account} />
-            <input type="text" placeholder="Password" ref={password} />
+            <input
+              type="email"
+              placeholder="Email"
+              ref={email}
+              required
+              onInvalid={e =>
+                (e.target as HTMLInputElement).setCustomValidity('Please input your email')
+              }
+              onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
+            />
+            <input
+              type="text"
+              placeholder="Username"
+              ref={username}
+              required
+              onInvalid={e =>
+                (e.target as HTMLInputElement).setCustomValidity('Please input your username')
+              }
+              onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
+            />
+            <input
+              type="text"
+              placeholder="Account"
+              ref={account}
+              required
+              onInvalid={e =>
+                (e.target as HTMLInputElement).setCustomValidity('Please input your account')
+              }
+              onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              ref={password}
+              required
+              onInvalid={e =>
+                (e.target as HTMLInputElement).setCustomValidity('Please input your password')
+              }
+              onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
+            />
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+              <InputLabel id="demo-simple-select-standard-label">Gender</InputLabel>
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
-                value={age}
+                value={gender}
                 onChange={handleChange}
-                label="Age"
+                label="Gender"
+                required
               >
                 <MenuItem value="">
                   <em>None</em>
