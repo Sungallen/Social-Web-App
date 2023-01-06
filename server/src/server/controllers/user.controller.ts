@@ -1,8 +1,10 @@
 import register, {
+  friendRequestQuery,
   loginModule,
   randomQueryUsers,
 } from "../modules/user.module";
 import {
+  IFriendReq,
   IRegisterbody,
   IRegisterRes,
   TypedRequestBody,
@@ -58,4 +60,19 @@ export const randomSelUsers = (req: TypedRequestBody<null>, res: Response) => {
       res.status(200).send(result);
     })
     .catch((error) => res.status(400).send(error));
+};
+
+export const friendRequest = (
+  req: TypedRequestBody<IFriendReq>,
+  res: Response
+) => {
+  console.log(req.body.id);
+  friendRequestQuery(req.user.id, req.body.id).then((result) => {
+    console.log(result);
+    if (result.status === true) {
+      res.status(200).send(result);
+    } else {
+      res.status(401).send(result);
+    }
+  });
 };

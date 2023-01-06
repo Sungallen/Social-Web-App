@@ -8,7 +8,8 @@ const initialState: IUserSlice = {
   created_time: new Date(),
   gender: 0,
   loginStatus: '',
-  token: '',
+  token:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjU4LCJ1c2VybmFtZSI6IkFsbGVuIiwiZ2VuZGVyIjoxLCJjcmVhdGVkX3RpbWUiOiIyMDIyLTEyLTExVDE2OjMxOjIxLjAwMFoiLCJhY2NvdW50IjoiQWxsZW4iLCJwYXNzd29yZCI6IjEwMTciLCJlbWFpbCI6ImFsbGVuQGdtYWlsLmNvbSIsImltYWdlIjoiL3NlcnZlci9tZWRpYS91c2Vycy8yNTgvMjU4LmpwZyIsImlhdCI6MTY3Mjk5NDc5NCwiZXhwIjoxNjcyOTk4Mzk0fQ.tkm2iExIu8Dr4u05MLVDo9xF1jfRKq5SHMxiAQeI7KI',
 }
 
 export const userSlice = createSlice({

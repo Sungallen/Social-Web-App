@@ -1,6 +1,6 @@
 import { Key } from '@mui/icons-material'
 import Env from 'config/env'
-import { fetchFriendSug } from 'features/hooks/user.api'
+import { fetchFriendSug, friendReqApi } from 'features/hooks/user.api'
 import { IFriendSug } from 'features/types/user.types'
 import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
@@ -11,12 +11,32 @@ const RightBar = () => {
   const user = useAppSelector(state => state.user)
   const [friendSug, setFriendSug] = useState<IFriendSug[] | undefined>([])
   const { data } = useQuery(['friendSug', user.token], () => fetchFriendSug(user.token))
-  console.log(data)
+  const [friendReqId, setFriendReqId] = useState<number>(0)
   useEffect(() => {
     if (data?.length !== 0) {
       setFriendSug(data)
     }
-  }, [])
+  }, [data])
+  const { refetch } = useQuery(
+    ['friendReq', user.token, friendReqId],
+    () => friendReqApi(user.token, friendReqId),
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+    },
+  )
+  useEffect(() => {
+    if (friendReqId !== 0) {
+      refetch()
+    }
+  }, [friendReqId])
+  const FriendReqSub = (id: number) => {
+    setFriendReqId(id)
+    const element = document.getElementById(`${id}`)
+    if (element !== null) {
+      element.style.backgroundColor = '#7CFC00'
+    }
+  }
   return (
     <div className="rightBar">
       <div className="container">
@@ -30,7 +50,9 @@ const RightBar = () => {
                     <span>{element.username}</span>
                   </div>
                   <div className="buttons">
-                    <button>follow</button>
+                    <button id={`${element.id}`} onClick={() => FriendReqSub(element.id)}>
+                      follow
+                    </button>
                     <button>dismiss</button>
                   </div>
                 </div>

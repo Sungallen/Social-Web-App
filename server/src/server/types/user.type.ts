@@ -2,6 +2,7 @@ import express from "express";
 
 export interface TypedRequestBody<T> extends express.Request {
   user: IUserAuth;
+  body: T;
 }
 
 export interface IUser {
@@ -35,4 +36,12 @@ export interface IRegisterbody {
 
 export interface IRegisterRes {
   status: Boolean;
+}
+
+export interface IResStatus {
+  status: Boolean;
+}
+
+export interface IFriendReq {
+  id: number;
 }
