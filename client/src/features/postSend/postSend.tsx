@@ -2,6 +2,7 @@ import './postSend.scss'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { SyntheticEvent, useRef, useState } from 'react'
 import { userActions } from 'features/store/user.slice'
+import Env from 'config/env'
 
 const Share = () => {
   const postContent = useRef<HTMLInputElement | null>(null)
@@ -20,12 +21,7 @@ const Share = () => {
     <div className="share">
       <div className="container">
         <div className="top">
-          <img
-            src={
-              'https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600'
-            }
-            alt=""
-          />
+          <img src={`${Env.API_BASE_URL}/api/user/image?path=${currentUser.image}`} alt="" />
           <input
             type="text"
             ref={postContent}
