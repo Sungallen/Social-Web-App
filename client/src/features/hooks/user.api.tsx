@@ -21,6 +21,55 @@ export const registerApi = async (payload: IRegisterPayload): Promise<any> => {
   })
 }
 
+export const uploadProfileImageApi = async (image: File | null, token: string): Promise<any> => {
+  const formData = new FormData()
+  formData.append('image', image as File)
+  return api
+    .post(`/api/user/uploadprofileimage`, formData, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+export interface IUserUploadPost {
+  id: number // post's id
+  content: string
+  image?: File
+  timestamp: string
+  numlikes: number
+  user_id: number // user's id
+}
+
+export const userSharePostApi = async (
+  // { image, id, content, timestamp, numlikes, user_id }: IUserUploadPost,
+  image: File | null,
+  token: string,
+): Promise<any> => {
+  const formData = new FormData()
+  // formData.append('id', id?.toString())
+  // formData.append('content', content)
+  // formData.append('image', image as File)
+  // formData.append('timestamp', timestamp)
+  // formData.append('numlikes', numlikes?.toString())
+  // formData.append('user_id', user_id?.toString())
+
+  return api
+    .post(`/api/user/sharepost`, formData, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
 export const fetchFriendSug = async (token: string) => {
   const response: IFriendSug[] = await api.get(`api/user/randomgetusers`, {
     headers: {

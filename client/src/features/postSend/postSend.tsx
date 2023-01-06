@@ -1,7 +1,8 @@
 import './postSend.scss'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { SyntheticEvent, useRef, useState } from 'react'
-import { userActions } from 'features/store/user.slice'
+import { userSlice, userActions } from 'features/store/user.slice'
+import Env from 'config/env'
 
 const Share = () => {
   const postContent = useRef<HTMLInputElement | null>(null)
@@ -12,9 +13,13 @@ const Share = () => {
     setPicture(current => (e.target as HTMLInputElement).files)
   }
   const onSubmitPost = (e: SyntheticEvent) => {
-    dispatch(
-      userActions.submitPostSaga(postContent.current?.value, picture === null ? null : picture[0]),
-    )
+    // dispatch(
+    //   // userActions.submitPostSaga(postContent.current?.value, picture === null ? null : picture[0]),
+    //   userActions.submitPostSaga(token),
+    // )
+    // if (picture !== null) dispatch(userSlice.actions.modifyUserImage(picture[0].name))
+    dispatch(userActions.sharePostSaga(picture === null ? null : picture[0], currentUser.token))
+    setPicture(null)
   }
   return (
     <div className="share">

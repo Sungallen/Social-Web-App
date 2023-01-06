@@ -39,7 +39,7 @@ export const userActions = {
   ),
   submitPostSaga: createAction(
     `${userSlice}/postSaga`,
-    (content: string | undefined, image: File | null) => ({ payload: { content, image } }),
+    (content?: string | undefined, image?: File | null, token?: string) => ({ payload: { token } }),
   ),
   registerSaga: createAction(
     `${userSlice.name}/registerSaga`,
@@ -51,6 +51,10 @@ export const userActions = {
       created_time: Date,
       gender: number,
     ) => ({ payload: { email, username, account, password, created_time, gender } }),
+  ),
+  sharePostSaga: createAction(
+    `${userSlice}/sharePostSaga`,
+    (image: File | null, token: string) => ({ payload: { image, token } }),
   ),
 }
 

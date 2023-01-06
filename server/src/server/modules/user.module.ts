@@ -107,4 +107,32 @@ export const randomQueryUsers = (userId: number): Promise<IUser[] | IUser> =>
 //     query();
 //   });
 
+export const insertPostToDatabase = (
+  id: number,
+  content?: string,
+  image?: string,
+  timestamp?: string,
+  numlike?: number,
+  user_id?: number
+): Promise<{ status: true }> =>
+  new Promise((resolve, reject) => {
+    console.log("insertPostToDatabase");
+
+    // const queryString = `INSERT INTO posts (content, image, timestamp, numlike, user_id) VALUE ("${content}", "${image}", "${timestamp}", ${numlike}, ${user_id})`;
+    // query(
+    //   `INSERT INTO posts (id, content, image, timestamp, numlike, user_id) VALUE (?, ?, ?, ?, ?)`,
+    //   [id, content, image, timestamp, numlike, user_id]
+    // );
+    query(
+      "INSERT INTO posts (`id`, `content`, `image`, `timestamp`, `numlike`,  `user_id`) VALUE (?, ?, ?, ?, ?)",
+      [id, content, image, timestamp, numlike, user_id]
+    )
+      .then((result) => {
+        resolve({ status: true });
+      })
+      .catch((error) => {
+        reject({ status: false });
+      });
+  });
+
 export default register;
