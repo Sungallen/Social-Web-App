@@ -2,14 +2,15 @@ import { createAction, createSlice, nanoid, PayloadAction } from '@reduxjs/toolk
 import { IUserLogin, IUserSlice } from 'features/types/user.types'
 
 const initialState: IUserSlice = {
+  id: 0,
   username: '',
   email: '',
   account: '',
   created_time: new Date(),
   gender: 0,
   loginStatus: '',
-  token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjU4LCJ1c2VybmFtZSI6IkFsbGVuIiwiZ2VuZGVyIjoxLCJjcmVhdGVkX3RpbWUiOiIyMDIyLTEyLTExVDE2OjMxOjIxLjAwMFoiLCJhY2NvdW50IjoiQWxsZW4iLCJwYXNzd29yZCI6IjEwMTciLCJlbWFpbCI6ImFsbGVuQGdtYWlsLmNvbSIsImltYWdlIjoiL3NlcnZlci9tZWRpYS91c2Vycy8yNTgvMjU4LmpwZyIsImlhdCI6MTY3Mjk5NDc5NCwiZXhwIjoxNjcyOTk4Mzk0fQ.tkm2iExIu8Dr4u05MLVDo9xF1jfRKq5SHMxiAQeI7KI',
+  token: '',
+  image: '',
 }
 
 export const userSlice = createSlice({
@@ -17,6 +18,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo(state, action: PayloadAction<IUserLogin>) {
+      state.id = action.payload.user[0].id
       state.username = action.payload.user[0].username
       state.email = action.payload.user[0].email
       state.account = action.payload.user[0].account
@@ -24,9 +26,13 @@ export const userSlice = createSlice({
       state.gender = action.payload.user[0].gender
       state.loginStatus = 'Login'
       state.token = action.payload.token
+      state.image = action.payload.user[0].image
     },
     setTestingToken(state, action: PayloadAction<string>) {
       state.token = action.payload
+    },
+    modifyUserImage(state, action: PayloadAction<string | any | null>) {
+      state.image = `/server/media/users/${state.id}/${action.payload}`
     },
   },
 })
@@ -41,6 +47,10 @@ export const userActions = {
   submitPostSaga: createAction(
     `${userSlice}/postSaga`,
     (content: string | undefined, image: File | null) => ({ payload: { content, image } }),
+  ),
+  uploadProfileImageSaga: createAction(
+    `${userSlice}/uploadProfileImageSaga`,
+    (image: File | null, token: string) => ({ payload: { image, token } }),
   ),
   registerSaga: createAction(
     `${userSlice.name}/registerSaga`,

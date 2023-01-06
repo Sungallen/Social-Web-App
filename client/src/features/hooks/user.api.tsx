@@ -21,6 +21,22 @@ export const registerApi = async (payload: IRegisterPayload): Promise<any> => {
   })
 }
 
+export const uploadProfileImageApi = async (image: File | null, token: string): Promise<any> => {
+  const formData = new FormData()
+  formData.append('image', image as File)
+  console.log(image)
+  return api
+    .post(`/api/user/uploadprofileimage`, formData, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
 export const fetchFriendSug = async (token: string) => {
   const response: IFriendSug[] = await api.get(`api/user/randomgetusers`, {
     headers: {

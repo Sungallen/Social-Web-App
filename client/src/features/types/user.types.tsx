@@ -1,4 +1,5 @@
 export interface IUserSlice {
+  id: number
   username: string
   account: string
   created_time: Date
@@ -6,6 +7,7 @@ export interface IUserSlice {
   gender: number
   loginStatus: string
   token: string
+  image: string
 }
 
 export interface ILoginActionPayload {
@@ -21,6 +23,7 @@ export interface IUser {
   birth: Date
   email: string
   gender: number
+  image: string
 }
 export interface IUserLogin {
   user: IUser[]

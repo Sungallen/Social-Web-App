@@ -110,6 +110,18 @@ export const randomQueryUsers = (userId: number): Promise<IUser[] | IUser> =>
 // export const getFriendSug = (account: string): Promise<any> =>
 //   new Promise((resolve, reject) => {
 //     query();
+//   });
+export const modifyImagePath = (
+  userId: number,
+  imagePath: string
+): Promise<{ status: true }> =>
+  new Promise((resolve, reject) => {
+    query("UPDATE users SET image = ? WHERE id = ?", [imagePath, userId])
+      .then((result) => {
+        resolve({ status: true });
+      })
+      .catch((error) => reject(error));
+  });
 //   });e
 
 export const friendRequestQuery = (

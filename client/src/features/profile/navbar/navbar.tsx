@@ -7,10 +7,10 @@ import Face6RoundedIcon from '@mui/icons-material/Face6Rounded'
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded'
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded'
 import SocialDistance from '@mui/icons-material/SocialDistance'
-import { IconButton } from '@mui/material'
+import { Avatar, IconButton } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useAppSelector } from 'store/hooks'
-import { Children } from 'react'
+import Env from 'config/env'
 
 const theme = createTheme({
   palette: {
@@ -77,6 +77,10 @@ export const Navbar = () => {
           <div className="user">
             <IconButton onClick={userInfoonClick} style={{ color: 'black' }}>
               <span>{currentUser.username}</span>
+              <Avatar
+                alt="Allen"
+                src={`${Env.API_BASE_URL}/api/user/image?path=${currentUser.image}`}
+              />
             </IconButton>
           </div>
         </div>
