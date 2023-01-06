@@ -44,3 +44,7 @@ export interface IFriendSug {
   username: string
   image: string
 }
+
+export interface IResStatus {
+  status: Boolean
+}

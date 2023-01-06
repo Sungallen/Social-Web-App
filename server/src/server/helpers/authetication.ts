@@ -9,7 +9,9 @@ export const generateAccessToken = (user: IUser) => {
 
 export const autheticateToken = (req: any, res: Response, next: any) => {
   const authHeader = req.headers["authorization"];
+  console.log(authHeader);
   const token = authHeader && authHeader.split(" ")[1];
+  console.log(token);
   if (token === undefined) return res.send("please login").status(401);
   JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     console.log(err);

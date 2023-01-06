@@ -1,10 +1,11 @@
 import { modifyImagePath } from "./../modules/user.module";
-import { multer } from "multer";
 import register, {
+  friendRequestQuery,
   loginModule,
   randomQueryUsers,
 } from "../modules/user.module";
 import {
+  IFriendReq,
   IRegisterbody,
   IRegisterRes,
   TypedRequestBody,
@@ -88,11 +89,19 @@ export const uploadprofileimageController = (req: any, res: Response) => {
       }
     })
     .catch((error) => res.send(error).status(400));
-  // const file = req.files?.file;
-  // if (file) {
-  //   const path = file.path;
-  //   res.status(200).send(path);
-  // } else {
-  //   res.status(400).send("No file uploaded");
-  // }
+};
+
+export const friendRequest = (
+  req: TypedRequestBody<IFriendReq>,
+  res: Response
+) => {
+  console.log(req.body.id);
+  friendRequestQuery(req.user.id, req.body.id).then((result) => {
+    console.log(result);
+    if (result.status === true) {
+      res.status(200).send(result);
+    } else {
+      res.status(401).send(result);
+    }
+  });
 };

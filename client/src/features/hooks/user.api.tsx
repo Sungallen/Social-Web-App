@@ -45,3 +45,16 @@ export const fetchFriendSug = async (token: string) => {
   })
   return response
 }
+
+export const friendReqApi = async (token: string, userId: number) => {
+  const response: { status: boolean } = await api.put(
+    'api/user/friendreq',
+    { id: userId },
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
+  )
+  return response
+}

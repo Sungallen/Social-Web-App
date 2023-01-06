@@ -20,3 +20,10 @@ export const neo4jUserRegister = (queryString: string) =>
       reject(e);
     }
   });
+
+// export const neo4jFriendReq = (user: number, friend: number) =>
+//   new Promise<any>((resolve, reject) => {
+//     try {
+//       const result = await session.run()
+//     } catch (e) {}
+//   });
