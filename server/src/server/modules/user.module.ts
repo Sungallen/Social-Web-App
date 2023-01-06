@@ -3,7 +3,12 @@ import { neo4jUserRegister } from "../database_operations/neo4j.operations";
 import query from "../database_operations/operations";
 import { generateAccessToken } from "../helpers/authetication";
 import { BKTree } from "../helpers/BKtree";
-import { IRegisterbody, IRegisterRes, IUser } from "../types/user.type";
+import {
+  IRegisterbody,
+  IRegisterRes,
+  IResStatus,
+  IUser,
+} from "../types/user.type";
 
 const register = (insertValues: IRegisterbody): Promise<IRegisterRes> =>
   new Promise((resolve, reject) => {
@@ -105,6 +110,26 @@ export const randomQueryUsers = (userId: number): Promise<IUser[] | IUser> =>
 // export const getFriendSug = (account: string): Promise<any> =>
 //   new Promise((resolve, reject) => {
 //     query();
-//   });
+//   });e
+
+export const friendRequestQuery = (
+  user: number,
+  friend: number
+): Promise<IResStatus> =>
+  new Promise((resolve, reject) => {
+    const queryString = `MATCH (a: user), (b: user) WHERE a.id = ${user} AND b.id=${friend} CREATE (a)-[r: request]->(b) RETURN type(r)`;
+    neo4jUserRegister(queryString)
+      .then((result) => {
+        console.log(result);
+        if (result !== undefined) {
+          resolve({ status: true });
+        } else {
+          resolve({ status: false });
+        }
+      })
+      .catch((error) => {
+        reject({ status: false });
+      });
+  });
 
 export default register;

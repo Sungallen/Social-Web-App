@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import {
+  friendRequest,
   login,
   randomSelUsers,
   registerController,
@@ -17,4 +18,6 @@ userRouter.post("/register", registerController);
 userRouter.get("/image", uploadImage);
 userRouter.get("/login", login);
 userRouter.get("/randomgetusers", autheticateToken, randomSelUsers);
+userRouter.put("/friendreq", autheticateToken, friendRequest);
+
 export default userRouter;
